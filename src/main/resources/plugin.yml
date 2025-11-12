@@ -1,0 +1,6 @@
+name: CoarseDirtGuard
+version: '${project.version}'
+main: com.franchino961.coarsedirtguard.CoarseDirtGuard
+api-version: 1.18
+author: Franchino961
+description: Plugin che impedisce la trasformazione della coarse dirt in dirt path

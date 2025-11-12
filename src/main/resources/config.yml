@@ -1,0 +1,18 @@
+# Configurazione CoarseDirtGuard
+# Plugin che impedisce la trasformazione di blocchi specifici in dirt path
+
+# Blocchi da proteggere dalla trasformazione in dirt path
+# Valori possibili: GRASS_BLOCK, DIRT, COARSE_DIRT, PODZOL, MYCELIUM
+protected-blocks:
+  - COARSE_DIRT
+
+# Impostazioni generali
+settings:
+  # Blocca la trasformazione in dirt path con la pala
+  block-shovel: true
+  
+  # Blocca la trasformazione in dirt con la zappa
+  block-hoe: true
+  
+  # Log delle azioni bloccate nella console (opzionale)
+  log-blocked-actions: false

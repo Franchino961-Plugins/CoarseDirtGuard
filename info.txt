@@ -1,0 +1,79 @@
+# 📑 Riassunto completo – Dirt Path & CMI
+
+## 1. Meccanica di Minecraft
+- Click destro con **pala** su certi blocchi → diventano **dirt path**.  
+- Blocchi compatibili:  
+  - Grass block  
+  - Dirt  
+  - Coarse dirt  
+  - Podzol  
+  - Mycelium  
+- Blocchi non compatibili:  
+  - Farmland  
+  - Rooted dirt  
+  - Altri tipi speciali  
+- ⚠️ Anche la **coarse dirt** diventa dirt path.
+
+---
+
+## 2. CMI
+- **CMI non ha alcuna opzione o comando** per bloccare questa interazione.  
+
+---
+
+## 3. Soluzioni alternative
+### 🔹 Plugin già esistente
+- **Disable coarse dirt to dirt path** (SpigotMC).  
+- Impedisce la trasformazione della coarse dirt.  
+- Funziona fino alla **1.18**.
+
+### 🔹 Codice Java personalizzato
+- Si può scrivere un **plugin Spigot/Paper** che intercetta eventi.  
+- Approcci possibili:  
+  1. `BlockFadeEvent` → annulla quando il nuovo stato è `DIRT_PATH`.  
+  2. `PlayerInteractEvent` → se il blocco è `COARSE_DIRT`, annulla l’azione.  
+
+Esempio (solo coarse dirt):
+
+java
+@EventHandler
+public void onPlayerInteract(PlayerInteractEvent event) {
+    if (event.getAction() == Action.RIGHT_CLICK_BLOCK 
+        && event.getClickedBlock() != null 
+        && event.getClickedBlock().getType() == Material.COARSE_DIRT) {
+        event.setCancelled(true);
+    }
+}
+
+### 🔹 Mod o workaround
+- Alcuni utenti suggeriscono **mod client-side** o **texture pack**,  
+  ma non sono lato server.
+
+---
+
+## 4. Plugin custom sviluppato
+- Compatibile con **Spigot/Paper 1.18+** (Java 17 richiesto).  
+- Blocca **solo** la trasformazione della coarse dirt.  
+- Gli altri blocchi si trasformano normalmente in dirt path.  
+
+### Struttura
+- `pom.xml` con dipendenza `paper-api`.  
+- Classe `DisableCoarseDirtPath.java` che implementa `Listener`.  
+- File `plugin.yml` con nome, versione, api-version.  
+
+### Risultato
+- Click destro + pala su coarse dirt → **non succede nulla**.  
+- Tutti gli altri blocchi → funzionano come sempre.  
+
+---
+
+## 5. Estensioni possibili
+- Aggiungere un file `config.yml` con lista di blocchi da proteggere  
+  → più flessibile, senza ricompilare.  
+
+---
+
+## ✅ Conclusione
+- **CMI non può bloccare questa interazione.**  
+- Esiste un piccolo plugin già pronto (fino a 1.18).  
+- La soluzione più affidabile è un **plugin custom** che annulli l’evento solo per i blocchi desiderati.
