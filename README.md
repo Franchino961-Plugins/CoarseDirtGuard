@@ -1,8 +1,8 @@
 # 🛡️ CoarseDirtGuard
 
-![Minecraft](https://img.shields.io/badge/Minecraft-1.18+-green.svg)
-![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)]()
+[![Minecraft](https://img.shields.io/badge/minecraft-1.18+-green.svg)](https://www.minecraft.net/)
+[![License](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
 
 Plugin leggero e performante per Spigot/Paper che impedisce **silenziosamente** la trasformazione di blocchi specifici (come la coarse dirt) in dirt path o dirt quando si utilizzano pale o zappe. Perfetto per proteggere aree decorative o terreni speciali senza impattare l'esperienza di gioco.
 
