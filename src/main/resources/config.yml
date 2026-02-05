@@ -2,7 +2,7 @@
 # Plugin che impedisce la trasformazione di blocchi specifici in dirt path
 
 # Blocchi da proteggere dalla trasformazione in dirt path
-# Valori possibili: GRASS_BLOCK, DIRT, COARSE_DIRT, PODZOL, MYCELIUM
+# Valori possibili: GRASS_BLOCK, DIRT, COARSE_DIRT, PODZOL, MYCELIUM, ROOTED_DIRT
 protected-blocks:
   - COARSE_DIRT
 
@@ -16,3 +16,6 @@ settings:
   
   # Log delle azioni bloccate nella console (opzionale)
   log-blocked-actions: false
+  
+  # Modalità debug - logging dettagliato per troubleshooting
+  debug: false

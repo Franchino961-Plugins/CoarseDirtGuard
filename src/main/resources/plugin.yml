@@ -4,3 +4,25 @@ main: com.franchino961.coarsedirtguard.CoarseDirtGuard
 api-version: 1.18
 author: Franchino961
 description: Prevents coarse dirt from being converted into dirt paths.
+
+commands:
+  coarsedirtguard:
+    description: "Comandi principali di CoarseDirtGuard"
+    aliases: [cdg, cdguard]
+    usage: |
+      /coarsedirtguard reload - Ricarica la configurazione
+      /coarsedirtguard info - Mostra informazioni sul plugin
+
+permissions:
+  coarsedirtguard.bypass:
+    description: "Bypassa tutte le protezioni del plugin"
+    default: op
+  coarsedirtguard.bypass.shovel:
+    description: "Bypassa la protezione delle pale"
+    default: op
+  coarsedirtguard.bypass.hoe:
+    description: "Bypassa la protezione delle zappe"
+    default: op
+  coarsedirtguard.reload:
+    description: "Permette di ricaricare la configurazione"
+    default: op

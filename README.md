@@ -1,6 +1,6 @@
 # 🛡️ CoarseDirtGuard
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)]()
+[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)]()
 [![Minecraft](https://img.shields.io/badge/minecraft-1.18+-green.svg)](https://www.minecraft.net/)
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
 
@@ -11,13 +11,14 @@ Plugin leggero e performante per Spigot/Paper che impedisce **silenziosamente** 
 - 🛡️ **Protezione invisibile** - Blocca le trasformazioni senza messaggi in chat
 - 🔧 **Altamente configurabile** - Scegli quali strumenti (pale/zappe) bloccare
 - 📦 **Multi-blocco** - Proteggi coarse dirt, podzol, mycelium e altri blocchi
-- ⚡ **Prestazioni ottimali** - Nessun impatto su TPS o performance del server
-- 🚫 **Zero permessi richiesti** - Funziona automaticamente per tutti i player
-- 💻 **Nessun comando** - Setup automatico senza configurazione complessa
-- 📊 **Logging opzionale** - Traccia azioni bloccate per analisi (disabilitato di default)
-- 🔄 **Reload live** - Ricarica configurazione senza restart
+- ⚡ **Prestazioni ottimali** - EnumSet O(1) lookup, zero impatto su TPS
+- 🔐 **Sistema permessi** - Bypass granulari per admin e builder
+- 💻 **Comandi dedicati** - Reload e info senza restart server
+- 📊 **Logging avanzato** - Traccia azioni bloccate con modalità debug
+- 🔄 **Reload sicuro** - Comando dedicato invece di `/reload confirm`
 - 🎯 **Compatibilità estesa** - Minecraft 1.18+ (Spigot/Paper)
 - 🪶 **Leggerissimo** - Singola classe Java, footprint minimale
+- 📖 **JavaDoc completo** - Documentazione per sviluppatori
 
 ## 🚀 Installazione
 
@@ -36,16 +37,46 @@ Plugin leggero e performante per Spigot/Paper che impedisce **silenziosamente** 
 
 ## 🎮 Comandi
 
-**Il plugin non ha comandi.** Funziona automaticamente dopo l'installazione.
+| Comando | Descrizione | Permesso | Default |
+|---------|-------------|----------|---------|
+| `/coarsedirtguard reload` | Ricarica la configurazione | `coarsedirtguard.reload` | OP |
+| `/coarsedirtguard info` | Mostra informazioni sul plugin | Nessuno | Tutti |
 
-Per ricaricare la configurazione, usa il comando standard di Bukkit:
-```
-/reload confirm
+**Alias**: `/cdg`, `/cdguard`
+
+### Esempi
+
+```bash
+# Ricarica configurazione dopo modifiche
+/coarsedirtguard reload
+/cdg reload
+
+# Visualizza stato plugin
+/coarsedirtguard info
+/cdg info
 ```
 
 ## 🔑 Permessi
 
-**Il plugin non richiede permessi.** La protezione è attiva per tutti i player senza distinzioni.
+| Permesso | Descrizione | Default |
+|----------|-------------|---------|
+| `coarsedirtguard.bypass` | Bypassa tutte le protezioni del plugin | OP |
+| `coarsedirtguard.bypass.shovel` | Bypassa solo la protezione delle pale | OP |
+| `coarsedirtguard.bypass.hoe` | Bypassa solo la protezione delle zappe | OP |
+| `coarsedirtguard.reload` | Permette di ricaricare la configurazione | OP |
+
+### Esempi Permessi
+
+```yaml
+# LuckPerms - Dare bypass completo a builder
+lp group builder permission set coarsedirtguard.bypass true
+
+# LuckPerms - Permettere solo pale a landscaper
+lp group landscaper permission set coarsedirtguard.bypass.shovel true
+
+# LuckPerms - Admin può ricaricare
+lp group admin permission set coarsedirtguard.reload true
+```
 
 ## ⚙️ Configurazione
 
@@ -68,15 +99,17 @@ protected-blocks:
 
 # Impostazioni generali
 settings:
-  # Blocca la trasformazione in dirt path con pale (WOODEN/STONE/IRON/GOLDEN/DIAMOND/NETHERITE)
+  # Blocca la trasformazione in dirt path con pale
   block-shovel: true
   
-  # Blocca la trasformazione in dirt con zappe (WOODEN/STONE/IRON/GOLDEN/DIAMOND/NETHERITE)
+  # Blocca la trasformazione in dirt con zappe
   block-hoe: true
   
-  # Log delle azioni bloccate nella console del server (per debug/statistiche)
-  # Formato: "Bloccata trasformazione di COARSE_DIRT da parte di PlayerName alle coordinate X, Y, Z"
+  # Log delle azioni bloccate nella console (per debug/statistiche)
   log-blocked-actions: false
+  
+  # Modalità debug - logging dettagliato per troubleshooting
+  debug: false
 ```
 
 ### Opzioni di Configurazione Dettagliate
@@ -87,6 +120,7 @@ settings:
 | `settings.block-shovel` | Boolean | `true` | Blocca pale (dirt path creation) |
 | `settings.block-hoe` | Boolean | `true` | Blocca zappe (dirt creation) |
 | `settings.log-blocked-actions` | Boolean | `false` | Abilita logging console delle azioni bloccate |
+| `settings.debug` | Boolean | `false` | Abilita modalità debug con logging dettagliato |
 
 ## 🔬 Dettagli Tecnici
 
@@ -484,6 +518,66 @@ Vedi la pagina [Issues](../../issues) per segnalare bug o richiedere nuove funzi
 
 ## 📝 Changelog
 
+### v1.1.0 - Ottimizzazioni e Nuove Funzionalità (Febbraio 2026)
+
+#### ⚡ Ottimizzazioni Performance
+- **EnumSet O(1) Lookup**: Sostituiti confronti multipli con `EnumSet` per lookup O(1)
+  - Metodi `isShovel()` e `isHoe()` ora usano `EnumSet.contains()` invece di catene di OR
+  - Performance migliorate su server con alto traffico
+- **HashSet per Blocchi Protetti**: Usato `HashSet<Material>` invece di `List<String>`
+  - Lookup più veloci per verificare blocchi protetti
+  - Validazione Material al caricamento config
+
+#### 🆕 Nuove Funzionalità
+- **Comando Reload Dedicato**: `/coarsedirtguard reload` (alias: `/cdg`, `/cdguard`)
+  - Ricarica configurazione senza `/reload confirm` (pericoloso)
+  - Feedback immediato su successo/errore
+  - Richiede permesso `coarsedirtguard.reload`
+- **Comando Info**: `/coarsedirtguard info`
+  - Visualizza stato corrente del plugin
+  - Mostra numero blocchi protetti e impostazioni attive
+  - Disponibile per tutti i giocatori
+- **Sistema Permessi Granulare**:
+  - `coarsedirtguard.bypass` - Bypassa tutte le protezioni
+  - `coarsedirtguard.bypass.shovel` - Bypassa solo pale
+  - `coarsedirtguard.bypass.hoe` - Bypassa solo zappe
+  - `coarsedirtguard.reload` - Permette reload configurazione
+- **Modalità Debug**: Nuova opzione `settings.debug` in config.yml
+  - Logging dettagliato per troubleshooting
+  - Traccia bypass permessi e eventi bloccati
+  - Usa `logger.fine()` per non spammare console
+
+#### 🔧 Miglioramenti
+- **JavaDoc Completo**: Documentazione per tutte le classi e metodi
+  - `@author`, `@version`, `@since`, `@param`, `@return`
+  - Generazione automatica Javadoc
+  - Migliore manutenibilità per sviluppatori
+- **Gestione Errori Avanzata**:
+  - Validazione nomi Material con fallback a `COARSE_DIRT`
+  - Plugin si disabilita se config è critica
+  - Logging specifico per Material invalidi
+  - Try-catch su `loadConfig()` con stack trace
+- **Logging Migliorato**:
+  - Formato strutturato con `String.format()`
+  - Informazioni dettagliate: tipo strumento, coordinate, giocatore
+  - Separazione tra logging normale e debug
+- **Config Validation**:
+  - Controllo lista `protected-blocks` vuota
+  - Warning per Material non validi
+  - Auto-rimozione entry invalide
+
+#### 🐛 Bug Fix
+- **Crash su Config Malformata**: Plugin ora gestisce config invalide senza crash
+- **Material Invalidi**: Non causano più errori, vengono ignorati con warning
+
+#### 📦 Modifiche Tecniche
+- Cambiato `List<String> protectedBlocks` → `Set<Material> protectedBlocks`
+- Aggiunti campi `debugMode` e `SHOVELS`/`HOES` EnumSet statici
+- Implementato `CommandExecutor` per gestione comandi
+- Aggiunta sezione `commands` e `permissions` in `plugin.yml`
+
+---
+
 ### v1.0.0 - Release Iniziale (Dicembre 2024)
 
 - 🎉 **Prima release pubblica stabile**
@@ -524,6 +618,4 @@ Se trovi utile questo plugin, considera di:
 - [Maven Plugin Development](https://maven.apache.org/guides/introduction/introduction-to-plugins.html)
 - [Paper Discussion Forum](https://forums.papermc.io/)
 
----
-
-**Versione Plugin:** 1.0.0 | **Ultima Modifica README:** 17 Dicembre 2024 | **Compatibilità:** Minecraft 1.18-1.20+
+---s
