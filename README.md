@@ -3,128 +3,133 @@
 [![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)]()
 [![Minecraft](https://img.shields.io/badge/minecraft-1.18+-green.svg)](https://www.minecraft.net/)
 [![License](https://img.shields.io/badge/license-MIT-yellow.svg)](LICENSE)
+[![Spigot](https://img.shields.io/badge/Spigot-1.18+-orange.svg)](https://www.spigotmc.org/)
 
-Plugin leggero e performante per Spigot/Paper che impedisce **silenziosamente** la trasformazione di blocchi specifici (come la coarse dirt) in dirt path o dirt quando si utilizzano pale o zappe. Perfetto per proteggere aree decorative o terreni speciali senza impattare l'esperienza di gioco.
+[![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)
+[![it](https://img.shields.io/badge/lang-it-green.svg)](MD/README.it.md)
 
-## 📋 Caratteristiche
+> 📝 [Changelog](MD/CHANGELOG.en.md)
 
-- 🛡️ **Protezione invisibile** - Blocca le trasformazioni senza messaggi in chat
-- 🔧 **Altamente configurabile** - Scegli quali strumenti (pale/zappe) bloccare
-- 📦 **Multi-blocco** - Proteggi coarse dirt, podzol, mycelium e altri blocchi
-- ⚡ **Prestazioni ottimali** - EnumSet O(1) lookup, zero impatto su TPS
-- 🔐 **Sistema permessi** - Bypass granulari per admin e builder
-- 💻 **Comandi dedicati** - Reload e info senza restart server
-- 📊 **Logging avanzato** - Traccia azioni bloccate con modalità debug
-- 🔄 **Reload sicuro** - Comando dedicato invece di `/reload confirm`
-- 🎯 **Compatibilità estesa** - Minecraft 1.18+ (Spigot/Paper)
-- 🪶 **Leggerissimo** - Singola classe Java, footprint minimale
-- 📖 **JavaDoc completo** - Documentazione per sviluppatori
+Lightweight and performant plugin for Spigot/Paper that **silently** prevents the transformation of specific blocks (like coarse dirt) into dirt paths or dirt when using shovels or hoes. Perfect for protecting decorative areas or special terrain without impacting gameplay experience.
 
-## 🚀 Installazione
+## 📋 Features
 
-### Metodo 1: Compilazione da Sorgente
-1. Clona il repository: `git clone https://github.com/Fagghino/CoarseDirtGuard.git`
-2. Compila con Maven: `mvn clean package`
-3. Copia `target/CoarseDirtGuard-1.0.0.jar` nella cartella `plugins/` del server
-4. Riavvia il server o usa `/reload confirm`
-5. Modifica `plugins/CoarseDirtGuard/config.yml` se necessario
+- 🛡️ **Invisible Protection** - Blocks transformations without chat messages
+- 🔧 **Highly Configurable** - Choose which tools (shovels/hoes) to block
+- 📦 **Multi-Block** - Protect coarse dirt, podzol, mycelium and other blocks
+- ⚡ **Optimal Performance** - EnumSet O(1) lookup, zero TPS impact
+- 🔐 **Permission System** - Granular bypasses for admins and builders
+- 💻 **Dedicated Commands** - Reload and info without server restart
+- 📊 **Advanced Logging** - Track blocked actions with debug mode
+- 🔄 **Safe Reload** - Dedicated command instead of `/reload confirm`
+- 🎯 **Extended Compatibility** - Minecraft 1.18+ (Spigot/Paper)
+- 🪶 **Lightweight** - Single Java class, minimal footprint
+- 📖 **Complete JavaDoc** - Documentation for developers
 
-### Metodo 2: Download Release
-1. Scarica l'ultima release da [Releases](../../releases)
-2. Copia il JAR nella cartella `plugins/`
-3. Riavvia il server
-4. Il file `config.yml` verrà generato automaticamente
+## 📦 Requirements
 
-## 🎮 Comandi
+- **Java:** 17 or higher
+- **Server:** Spigot 1.18+ or Paper 1.18+ (Paper recommended for performance)
+- **Operating System:** Windows, Linux, macOS
 
-| Comando | Descrizione | Permesso | Default |
-|---------|-------------|----------|---------|
-| `/coarsedirtguard reload` | Ricarica la configurazione | `coarsedirtguard.reload` | OP |
-| `/coarsedirtguard info` | Mostra informazioni sul plugin | Nessuno | Tutti |
+## 🚀 Installation
 
-**Alias**: `/cdg`, `/cdguard`
+1. Download the latest release from [GitHub Releases](../../releases) or from [SpigotMC](https://www.spigotmc.org/)
+2. Copy the JAR to your server's `plugins/` folder
+3. Restart the server
+4. The `config.yml` file will be generated automatically
+5. Edit `plugins/CoarseDirtGuard/config.yml` if needed and use `/cdg reload`
 
-### Esempi
+## 🎮 Commands
+
+| Command | Description | Permission | Default |
+|---------|-------------|------------|---------|
+| `/coarsedirtguard reload` | Reload configuration | `coarsedirtguard.reload` | OP |
+| `/coarsedirtguard info` | Show plugin information | None | Everyone |
+
+**Aliases**: `/cdg`, `/cdguard`
+
+### Examples
 
 ```bash
-# Ricarica configurazione dopo modifiche
+# Reload configuration after changes
 /coarsedirtguard reload
 /cdg reload
 
-# Visualizza stato plugin
+# View plugin status
 /coarsedirtguard info
 /cdg info
 ```
 
-## 🔑 Permessi
+## 🔑 Permissions
 
-| Permesso | Descrizione | Default |
-|----------|-------------|---------|
-| `coarsedirtguard.bypass` | Bypassa tutte le protezioni del plugin | OP |
-| `coarsedirtguard.bypass.shovel` | Bypassa solo la protezione delle pale | OP |
-| `coarsedirtguard.bypass.hoe` | Bypassa solo la protezione delle zappe | OP |
-| `coarsedirtguard.reload` | Permette di ricaricare la configurazione | OP |
+| Permission | Description | Default |
+|------------|-------------|---------|
+| `coarsedirtguard.bypass` | Bypasses all plugin protections | OP |
+| `coarsedirtguard.bypass.shovel` | Bypasses shovel protection only | OP |
+| `coarsedirtguard.bypass.hoe` | Bypasses hoe protection only | OP |
+| `coarsedirtguard.reload` | Allows configuration reload | OP |
 
-### Esempi Permessi
+### Permission Examples
 
 ```yaml
-# LuckPerms - Dare bypass completo a builder
+# LuckPerms - Give full bypass to builders
 lp group builder permission set coarsedirtguard.bypass true
 
-# LuckPerms - Permettere solo pale a landscaper
+# LuckPerms - Allow shovels only for landscapers
 lp group landscaper permission set coarsedirtguard.bypass.shovel true
 
-# LuckPerms - Admin può ricaricare
+# LuckPerms - Admin can reload
 lp group admin permission set coarsedirtguard.reload true
 ```
 
-## ⚙️ Configurazione
+## ⚙️ Configuration
 
 ### config.yml
 
-Il file `config.yml` viene generato automaticamente al primo avvio:
+The `config.yml` file is automatically generated on first startup:
 
 ```yaml
-# Configurazione CoarseDirtGuard
-# Plugin che impedisce la trasformazione di blocchi specifici in dirt path/dirt
+# CoarseDirtGuard Configuration
+# Plugin that prevents the transformation of specific blocks into dirt path/dirt
 
-# Blocchi da proteggere dalla trasformazione
-# Valori possibili: GRASS_BLOCK, DIRT, COARSE_DIRT, PODZOL, MYCELIUM, ROOTED_DIRT
+# Blocks to protect from transformation
+# Possible values: GRASS_BLOCK, DIRT, COARSE_DIRT, PODZOL, MYCELIUM, ROOTED_DIRT
 protected-blocks:
   - COARSE_DIRT
-  # Aggiungi altri blocchi secondo necessità:
+  # Add other blocks as needed:
   # - PODZOL
   # - MYCELIUM
   # - GRASS_BLOCK
 
-# Impostazioni generali
+# General settings
 settings:
-  # Blocca la trasformazione in dirt path con pale
+  # Block transformation to dirt path with shovels
   block-shovel: true
   
-  # Blocca la trasformazione in dirt con zappe
+  # Block transformation to dirt with hoes
   block-hoe: true
   
-  # Log delle azioni bloccate nella console (per debug/statistiche)
+  # Log blocked actions in console (for debugging/statistics)
   log-blocked-actions: false
   
-  # Modalità debug - logging dettagliato per troubleshooting
+  # Debug mode - detailed logging for troubleshooting
   debug: false
 ```
 
-### Opzioni di Configurazione Dettagliate
+### Detailed Configuration Options
 
-| Opzione | Tipo | Default | Descrizione |
-|---------|------|---------|-------------|
-| `protected-blocks` | Lista | `[COARSE_DIRT]` | Blocchi da proteggere (nomi Material Bukkit) |
-| `settings.block-shovel` | Boolean | `true` | Blocca pale (dirt path creation) |
-| `settings.block-hoe` | Boolean | `true` | Blocca zappe (dirt creation) |
-| `settings.log-blocked-actions` | Boolean | `false` | Abilita logging console delle azioni bloccate |
-| `settings.debug` | Boolean | `false` | Abilita modalità debug con logging dettagliato |
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `protected-blocks` | List | `[COARSE_DIRT]` | Blocks to protect (Bukkit Material names) |
+| `settings.block-shovel` | Boolean | `true` | Block shovels (dirt path creation) |
+| `settings.block-hoe` | Boolean | `true` | Block hoes (dirt creation) |
+| `settings.log-blocked-actions` | Boolean | `false` | Enable console logging of blocked actions |
+| `settings.debug` | Boolean | `false` | Enable debug mode with detailed logging |
 
-## 🔬 Dettagli Tecnici
+## 🔬 Technical Details
 
-### Architettura
+### Architecture
 
 ```
 CoarseDirtGuard.java
@@ -135,58 +140,58 @@ CoarseDirtGuard.java
 │   └── registerEvents(this)
 │
 ├── onPlayerInteract(PlayerInteractEvent)
-│   ├── Verifica: RIGHT_CLICK_BLOCK?
-│   ├── Verifica: Blocco protetto?
-│   ├── Verifica: Strumento vale/zappa?
-│   ├── Verifica: Strumento abilitato in config?
+│   ├── Check: RIGHT_CLICK_BLOCK?
+│   ├── Check: Protected block?
+│   ├── Check: Shovel/hoe tool?
+│   ├── Check: Tool enabled in config?
 │   ├── event.setCancelled(true)  [SILENT BLOCK]
-│   └── logger.info() [SE log-blocked-actions=true]
+│   └── logger.info() [IF log-blocked-actions=true]
 │
 ├── isShovel(Material) → Boolean
 └── isHoe(Material) → Boolean
 ```
 
-### Flow degli Eventi
+### Event Flow
 
-#### 1. Player Click Destro con Pala su Coarse Dirt
+#### 1. Player Right-Clicks with Shovel on Coarse Dirt
 ```
-PlayerInteractEvent trigger
+PlayerInteractEvent triggered
 → Action = RIGHT_CLICK_BLOCK ✓
 → Block = COARSE_DIRT ✓ (in protected-blocks)
 → Item = IRON_SHOVEL ✓ (isShovel returns true)
 → block-shovel = true ✓
-→ event.setCancelled(true) [BLOCCO SILENZIOSO]
-→ Player non vede messaggio, coarse dirt rimane invariata
+→ event.setCancelled(true) [SILENT BLOCK]
+→ Player sees no message, coarse dirt remains unchanged
 ```
 
-#### 2. Player Click Destro con Zappa su Coarse Dirt
+#### 2. Player Right-Clicks with Hoe on Coarse Dirt
 ```
-PlayerInteractEvent trigger
+PlayerInteractEvent triggered
 → Action = RIGHT_CLICK_BLOCK ✓
 → Block = COARSE_DIRT ✓ (in protected-blocks)
 → Item = DIAMOND_HOE ✓ (isHoe returns true)
 → block-hoe = true ✓
-→ event.setCancelled(true) [BLOCCO SILENZIOSO]
-→ Player non vede messaggio, coarse dirt non diventa dirt
+→ event.setCancelled(true) [SILENT BLOCK]
+→ Player sees no message, coarse dirt doesn't become dirt
 ```
 
-#### 3. Player Click Destro con Altro Strumento
+#### 3. Player Right-Clicks with Other Tool
 ```
-PlayerInteractEvent trigger
+PlayerInteractEvent triggered
 → Item != Shovel/Hoe
-→ Nessun intervento, evento procede normalmente
+→ No intervention, event proceeds normally
 ```
 
-### Persistenza Dati
+### Data Persistence
 
-Il plugin **non salva dati persistenti**. Utilizza solo configurazione statica:
+The plugin **does not save persistent data**. Uses only static configuration:
 - File: `plugins/CoarseDirtGuard/config.yml`
-- Caricamento: All'avvio e su reload
-- Formato: YAML standard
+- Loading: At startup and on reload
+- Format: Standard YAML
 
-### Strumenti Supportati
+### Supported Tools
 
-**Pale (Shovel):**
+**Shovels:**
 - `WOODEN_SHOVEL`
 - `STONE_SHOVEL`
 - `IRON_SHOVEL`
@@ -194,7 +199,7 @@ Il plugin **non salva dati persistenti**. Utilizza solo configurazione statica:
 - `DIAMOND_SHOVEL`
 - `NETHERITE_SHOVEL`
 
-**Zappe (Hoe):**
+**Hoes:**
 - `WOODEN_HOE`
 - `STONE_HOE`
 - `IRON_HOE`
@@ -202,106 +207,33 @@ Il plugin **non salva dati persistenti**. Utilizza solo configurazione statica:
 - `DIAMOND_HOE`
 - `NETHERITE_HOE`
 
-## 📖 Come Funziona
+## 📖 How It Works
 
-### Scenario d'Uso Pratico
+### Practical Use Case Scenario
 
-1. **Admin configura il plugin:**
-   - Installa CoarseDirtGuard
-   - Apre `config.yml` e aggiunge `PODZOL` alla lista `protected-blocks`
-   - Salva e riavvia il server
+1. **Admin configures the plugin:**
+   - Install CoarseDirtGuard
+   - Open `config.yml` and add `PODZOL` to `protected-blocks` list
+   - Save and restart the server
 
-2. **Player prova a creare un sentiero:**
-   - Prende una pala di ferro
-   - Click destro su un blocco di coarse dirt
-   - Il blocco **non si trasforma** in dirt path
-   - **Nessun messaggio** appare in chat
-   - Player pensa che il click non sia stato registrato (comportamento vanilla-like)
+2. **Player tries to create a path:**
+   - Takes an iron shovel
+   - Right-clicks a coarse dirt block
+   - The block **does not transform** into a dirt path
+   - **No message** appears in chat
+   - Player thinks the click wasn't registered (vanilla-like behaviour)
 
-3. **Admin monitora le azioni (opzionale):**
-   - Imposta `log-blocked-actions: true` in config
+3. **Admin monitors actions (optional):**
+   - Set `log-blocked-actions: true` in config
    - Reload: `/reload confirm`
-   - Console mostra: `[CoarseDirtGuard] Bloccata trasformazione di COARSE_DIRT da parte di Steve alle coordinate 100, 64, -200`
+   - Console shows: `[CoarseDirtGuard] Blocked COARSE_DIRT transformation by Steve at coordinates 100, 64, -200`
 
-4. **Amministrazione selettiva:**
-   - Disabilita `block-hoe: false` per permettere trasformazione coarse dirt → dirt con zappe
-   - Mantiene `block-shovel: true` per bloccare dirt path
-   - Reload senza restart del server
+4. **Selective Administration:**
+   - Disable `block-hoe: false` to allow coarse dirt → dirt transformation with hoes
+   - Keep `block-shovel: true` to block dirt path
+   - Reload without server restart
 
-## 📦 Requisiti
-
-- **Java:** 17 o superiore
-- **Server:** Spigot 1.18+ o Paper 1.18+ (consigliato Paper per performance)
-- **Maven:** 3.6+ (solo per compilazione da sorgente)
-- **Sistema Operativo:** Windows, Linux, macOS
-
-## 🔨 Compilazione
-
-### Clonazione e Build
-
-```bash
-# Clona il repository
-git clone https://github.com/Fagghino/CoarseDirtGuard.git
-
-# Entra nella directory
-cd CoarseDirtGuard
-
-# Compila con Maven
-mvn clean package
-
-# Il JAR sarà generato in:
-# target/CoarseDirtGuard-1.0.0.jar
-```
-
-### Build Profiles
-
-```bash
-# Build standard
-mvn clean package
-
-# Build con skip test
-mvn clean package -DskipTests
-
-# Build con dipendenze (già incluso maven-shade-plugin)
-mvn clean install
-```
-
-## 📚 Dipendenze Maven
-
-### repositories
-
-```xml
-<repositories>
-    <!-- Paper Repository -->
-    <repository>
-        <id>papermc-repo</id>
-        <url>https://repo.papermc.io/repository/maven-public/</url>
-    </repository>
-    <!-- Sonatype Repository -->
-    <repository>
-        <id>sonatype</id>
-        <url>https://oss.sonatype.org/content/groups/public/</url>
-    </repository>
-</repositories>
-```
-
-### dependencies
-
-```xml
-<dependencies>
-    <!-- Paper API (scope: provided - già presente nel server) -->
-    <dependency>
-        <groupId>io.papermc.paper</groupId>
-        <artifactId>paper-api</artifactId>
-        <version>1.20.1-R0.1-SNAPSHOT</version>
-        <scope>provided</scope>
-    </dependency>
-</dependencies>
-```
-
-**Nota:** Lo scope `provided` è utilizzato perché Paper API è già presente nel server runtime. Il plugin non include questa dipendenza nel JAR finale.
-
-## 🎯 Struttura del Progetto
+## 🎯 Project Structure
 
 ```
 CoarseDirtGuard/
@@ -325,59 +257,59 @@ CoarseDirtGuard/
 
 ## 🐛 Troubleshooting
 
-### Plugin non blocca le trasformazioni
+### Plugin doesn't block transformations
 
-**Soluzioni:**
-1. Verifica che il blocco sia nella lista `protected-blocks` con il nome Material corretto
-2. Controlla che `block-shovel` o `block-hoe` siano `true` nel config.yml
-3. Riavvia il server o usa `/reload confirm` dopo modifiche alla config
-4. Verifica versione server compatibile (1.18+)
-5. Controlla console per errori di caricamento
+**Solutions:**
+1. Verify the block is in `protected-blocks` list with correct Material name
+2. Check that `block-shovel` or `block-hoe` are `true` in config.yml
+3. Restart server or use `/reload confirm` after config changes
+4. Verify compatible server version (1.18+)
+5. Check console for loading errors
 
-### Come trovare il nome Material corretto di un blocco?
+### How to find correct Material name for a block?
 
-**Soluzioni:**
-1. Lista completa: [Bukkit Material Enum](https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html)
-2. In-game: Usa un plugin di debug come WorldEdit (`//wand` poi click sul blocco)
-3. Esempi comuni:
+**Solutions:**
+1. Complete list: [Bukkit Material Enum](https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html)
+2. In-game: Use debug plugin like WorldEdit (`//wand` then click block)
+3. Common examples:
    - Coarse Dirt: `COARSE_DIRT`
    - Podzol: `PODZOL`
    - Mycelium: `MYCELIUM`
    - Grass Block: `GRASS_BLOCK`
    - Rooted Dirt: `ROOTED_DIRT` (1.17+)
 
-### Plugin non si carica su server 1.17 o precedenti
+### Plugin doesn't load on server 1.17 or earlier
 
-**Soluzioni:**
-1. Questo plugin richiede **Minecraft 1.18+** (api-version: 1.18 in plugin.yml)
-2. Per versioni precedenti, modifica:
+**Solutions:**
+1. This plugin requires **Minecraft 1.18+** (api-version: 1.18 in plugin.yml)
+2. For earlier versions, modify:
    - `api-version: 1.17` in [plugin.yml](src/main/resources/plugin.yml)
-   - Paper API version in [pom.xml](pom.xml) a `1.17.1-R0.1-SNAPSHOT`
-3. Ricompila: `mvn clean package`
+   - Paper API version in [pom.xml](pom.xml) to `1.17.1-R0.1-SNAPSHOT`
+3. Recompile: `mvn clean package`
 
-### Logging non funziona
+### Logging doesn't work
 
-**Soluzioni:**
-1. Verifica `log-blocked-actions: true` nel config.yml
-2. Riavvia il server o reload
-3. Controlla il livello di logging del server (bukkit.yml o spigot.yml)
-4. I log appaiono nella console del server, non in chat
+**Solutions:**
+1. Verify `log-blocked-actions: true` in config.yml
+2. Restart server or reload
+3. Check server logging level (bukkit.yml or spigot.yml)
+4. Logs appear in server console, not in chat
 
-### Conflitto con altri plugin di protezione
+### Conflict with other protection plugins
 
-**Soluzioni:**
-1. Verifica priorità eventi (CoarseDirtGuard usa EventPriority.NORMAL)
-2. Plugin di protezione terra (WorldGuard, GriefPrevention) possono avere precedenza
-3. Se il blocco è già protetto da altri plugin, CoarseDirtGuard è ridondante
-4. Usa `log-blocked-actions: true` per verificare se il plugin interviene
+**Solutions:**
+1. Check event priority (CoarseDirtGuard uses EventPriority.NORMAL)
+2. Land protection plugins (WorldGuard, GriefPrevention) may take precedence
+3. If block is already protected by other plugins, CoarseDirtGuard is redundant
+4. Use `log-blocked-actions: true` to verify if plugin intervenes
 
-## 💡 Esempi Pratici
+## 💡 Practical Examples
 
-### Esempio 1: Protezione Area Decorativa Spawn
+### Example 1: Spawn Decorative Area Protection
 
-**Obiettivo:** Proteggere un'area decorativa allo spawn con coarse dirt e podzol.
+**Goal:** Protect spawn decorative area with coarse dirt and podzol.
 
-**Configurazione:**
+**Configuration:**
 ```yaml
 protected-blocks:
   - COARSE_DIRT
@@ -386,37 +318,37 @@ protected-blocks:
 settings:
   block-shovel: true
   block-hoe: true
-  log-blocked-actions: true  # Monitora tentativi
+  log-blocked-actions: true  # Monitor attempts
 ```
 
-**Risultato:** Player non possono rovinare la decorazione trasformando i blocchi in dirt path o dirt normale.
+**Result:** Players cannot ruin decoration by transforming blocks into dirt path or normal dirt.
 
 ---
 
-### Esempio 2: Protezione Selettiva per Farm Mycelium
+### Example 2: Selective Protection for Mycelium Farm
 
-**Obiettivo:** Impedire trasformazione mycelium in dirt path (pale) ma permettere farming con zappe.
+**Goal:** Prevent mycelium transformation into dirt path (shovels) but allow farming with hoes.
 
-**Configurazione:**
+**Configuration:**
 ```yaml
 protected-blocks:
   - MYCELIUM
 
 settings:
-  block-shovel: true   # Blocca pale
-  block-hoe: false     # Permetti zappe
+  block-shovel: true   # Block shovels
+  block-hoe: false     # Allow hoes
   log-blocked-actions: false
 ```
 
-**Risultato:** Farm di funghi protetta da creazione accidentale di sentieri, ma zappe funzionano normalmente.
+**Result:** Mushroom farm protected from accidental path creation, but hoes work normally.
 
 ---
 
-### Esempio 3: Protezione Multi-Blocco per Server Vanilla+
+### Example 3: Multi-Block Protection for Vanilla+ Server
 
-**Obiettivo:** Mantenere varietà terreni in mondo survival senza trasformazioni.
+**Goal:** Maintain terrain variety in survival world without transformations.
 
-**Configurazione:**
+**Configuration:**
 ```yaml
 protected-blocks:
   - COARSE_DIRT
@@ -431,15 +363,15 @@ settings:
   log-blocked-actions: false
 ```
 
-**Risultato:** Tutti i tipi di terreno speciali sono protetti, esperienza vanilla preservata.
+**Result:** All special terrain types protected, vanilla experience preserved.
 
 ---
 
-### Esempio 4: Debug e Analisi con Logging
+### Example 4: Debug and Analysis with Logging
 
-**Obiettivo:** Identificare aree dove player tentano frequentemente di creare sentieri.
+**Goal:** Identify areas where players frequently attempt to create paths.
 
-**Configurazione:**
+**Configuration:**
 ```yaml
 protected-blocks:
   - COARSE_DIRT
@@ -447,24 +379,24 @@ protected-blocks:
 settings:
   block-shovel: true
   block-hoe: false
-  log-blocked-actions: true  # Abilita tracciamento
+  log-blocked-actions: true  # Enable tracking
 ```
 
 **Console Output:**
 ```
-[CoarseDirtGuard] Bloccata trasformazione di COARSE_DIRT da parte di Steve alle coordinate 120, 65, -340
-[CoarseDirtGuard] Bloccata trasformazione di COARSE_DIRT da parte di Alex alle coordinate 121, 65, -339
+[CoarseDirtGuard] Blocked COARSE_DIRT transformation by Steve at coordinates 120, 65, -340
+[CoarseDirtGuard] Blocked COARSE_DIRT transformation by Alex at coordinates 121, 65, -339
 ```
 
-**Utilizzo:** Admin identifica coordinate 120,65,-340 come area ad alto traffico e decide se creare un sentiero permanente o mettere segnaletica.
+**Usage:** Admin identifies coordinates 120,65,-340 as high-traffic area and decides whether to create permanent path or add signage.
 
 ---
 
-### Esempio 5: Server Minigame con Reset Periodico
+### Example 5: Minigame Server with Periodic Reset
 
-**Obiettivo:** Proteggere terreno in arena minigame fino al reset.
+**Goal:** Protect terrain in minigame arena until reset.
 
-**Configurazione:**
+**Configuration:**
 ```yaml
 protected-blocks:
   - COARSE_DIRT
@@ -478,139 +410,33 @@ settings:
 ```
 
 **Workflow:**
-1. Setup arena con blocchi protetti
-2. Minigame esegue senza modifiche terreno
-3. Reset arena con plugin di world management
-4. Ciclo si ripete
+1. Set up arena with protected blocks
+2. Minigame runs without terrain modifications
+3. Reset arena with world management plugin
+4. Cycle repeats
 
-## 📄 Licenza
+## 📄 License
 
-Questo progetto è distribuito sotto licenza **MIT**. Vedi il file [LICENSE](LICENSE) per dettagli completi.
+This project is released under the **MIT** license — see the [LICENSE](LICENSE) file for details.
 
-```
-MIT License
+## 👤 Author
 
-Copyright (c) 2025 Fagghino
+**Franchino961** — [GitHub](https://github.com/Franchino961-Plugins)
 
-È permesso l'uso, copia, modifica, fusione, pubblicazione, distribuzione, 
-sublicenza e/o vendita di copie del Software, soggetto alle seguenti condizioni:
+## 🤝 Contributing
 
-L'avviso di copyright sopra e questo avviso di permesso devono essere inclusi 
-in tutte le copie o porzioni sostanziali del Software.
-```
+Contributions are welcome!
+- 🐛 Report bugs in [issues](../../issues)
+- 💡 Propose new features
+- 🔧 Submit Pull Requests
 
-## 👤 Autore
+## 💬 Support
 
-**Fagghino**
-- GitHub: [@Fagghino](https://github.com/Fagghino)
+For bug reports, feature requests, or questions:
+- Open an [issue](../../issues) on GitHub
+- Contact the developer
 
-## 🤝 Contribuire
-
-Contributi, issues e feature request sono benvenuti!
-
-1. Fai un fork del progetto
-2. Crea il tuo feature branch: `git checkout -b feature/AmazingFeature`
-3. Commit delle modifiche: `git commit -m 'Add: AmazingFeature'`
-4. Push al branch: `git push origin feature/AmazingFeature`
-5. Apri una Pull Request
-
-Vedi la pagina [Issues](../../issues) per segnalare bug o richiedere nuove funzionalità.
-
-## 📝 Changelog
-
-### v1.1.0 - Ottimizzazioni e Nuove Funzionalità (Febbraio 2026)
-
-#### ⚡ Ottimizzazioni Performance
-- **EnumSet O(1) Lookup**: Sostituiti confronti multipli con `EnumSet` per lookup O(1)
-  - Metodi `isShovel()` e `isHoe()` ora usano `EnumSet.contains()` invece di catene di OR
-  - Performance migliorate su server con alto traffico
-- **HashSet per Blocchi Protetti**: Usato `HashSet<Material>` invece di `List<String>`
-  - Lookup più veloci per verificare blocchi protetti
-  - Validazione Material al caricamento config
-
-#### 🆕 Nuove Funzionalità
-- **Comando Reload Dedicato**: `/coarsedirtguard reload` (alias: `/cdg`, `/cdguard`)
-  - Ricarica configurazione senza `/reload confirm` (pericoloso)
-  - Feedback immediato su successo/errore
-  - Richiede permesso `coarsedirtguard.reload`
-- **Comando Info**: `/coarsedirtguard info`
-  - Visualizza stato corrente del plugin
-  - Mostra numero blocchi protetti e impostazioni attive
-  - Disponibile per tutti i giocatori
-- **Sistema Permessi Granulare**:
-  - `coarsedirtguard.bypass` - Bypassa tutte le protezioni
-  - `coarsedirtguard.bypass.shovel` - Bypassa solo pale
-  - `coarsedirtguard.bypass.hoe` - Bypassa solo zappe
-  - `coarsedirtguard.reload` - Permette reload configurazione
-- **Modalità Debug**: Nuova opzione `settings.debug` in config.yml
-  - Logging dettagliato per troubleshooting
-  - Traccia bypass permessi e eventi bloccati
-  - Usa `logger.fine()` per non spammare console
-
-#### 🔧 Miglioramenti
-- **JavaDoc Completo**: Documentazione per tutte le classi e metodi
-  - `@author`, `@version`, `@since`, `@param`, `@return`
-  - Generazione automatica Javadoc
-  - Migliore manutenibilità per sviluppatori
-- **Gestione Errori Avanzata**:
-  - Validazione nomi Material con fallback a `COARSE_DIRT`
-  - Plugin si disabilita se config è critica
-  - Logging specifico per Material invalidi
-  - Try-catch su `loadConfig()` con stack trace
-- **Logging Migliorato**:
-  - Formato strutturato con `String.format()`
-  - Informazioni dettagliate: tipo strumento, coordinate, giocatore
-  - Separazione tra logging normale e debug
-- **Config Validation**:
-  - Controllo lista `protected-blocks` vuota
-  - Warning per Material non validi
-  - Auto-rimozione entry invalide
-
-#### 🐛 Bug Fix
-- **Crash su Config Malformata**: Plugin ora gestisce config invalide senza crash
-- **Material Invalidi**: Non causano più errori, vengono ignorati con warning
-
-#### 📦 Modifiche Tecniche
-- Cambiato `List<String> protectedBlocks` → `Set<Material> protectedBlocks`
-- Aggiunti campi `debugMode` e `SHOVELS`/`HOES` EnumSet statici
-- Implementato `CommandExecutor` per gestione comandi
-- Aggiunta sezione `commands` e `permissions` in `plugin.yml`
-
----
-
-### v1.0.0 - Release Iniziale (Dicembre 2024)
-
-- 🎉 **Prima release pubblica stabile**
-- 🛡️ **Sistema di Protezione Blocchi**
-  - Blocco silenzioso trasformazioni dirt path (pale)
-  - Blocco silenzioso trasformazioni dirt (zappe)
-  - Supporto tutti i materiali pale/zappe vanilla (wooden → netherite)
-- ⚙️ **Sistema di Configurazione**
-  - Lista blocchi protetti personalizzabile
-  - Toggle indipendenti per pale e zappe
-  - Logging opzionale azioni bloccate
-- 🔧 **Architettura**
-  - Singola classe Java per prestazioni ottimali
-  - Event listener su PlayerInteractEvent
-  - Zero dipendenze runtime (solo Paper API provided)
-- 📦 **Build e Distribuzione**
-  - Maven configuration con Shade plugin
-  - Filtraggio risorse per versioning automatico
-  - Compatibilità Paper 1.18+
-- 📖 **Documentazione**
-  - README completo con esempi pratici
-  - Config.yml con commenti inline
-  - Plugin.yml con metadata completi
-
-## ⭐ Supporto
-
-Se trovi utile questo plugin, considera di:
-- ⭐ Lasciare una stella su GitHub
-- 🐛 Segnalare bug o suggerire miglioramenti
-- 📢 Condividere con la community Minecraft
-- ☕ Offrire un caffè all'autore (link donazioni se disponibili)
-
-## 🔗 Link Utili
+## 🔗 Useful Links
 
 - [Spigot API Documentation](https://hub.spigotmc.org/javadocs/spigot/)
 - [Paper API Documentation](https://jd.papermc.io/paper/1.20/)
@@ -618,4 +444,8 @@ Se trovi utile questo plugin, considera di:
 - [Maven Plugin Development](https://maven.apache.org/guides/introduction/introduction-to-plugins.html)
 - [Paper Discussion Forum](https://forums.papermc.io/)
 
----s
+---
+
+## 📝 Changelog
+
+See [CHANGELOG.en.md](MD/CHANGELOG.en.md) for complete version history.
