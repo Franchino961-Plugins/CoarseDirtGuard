@@ -63,6 +63,7 @@ public class CoarseDirtGuard extends JavaPlugin implements Listener {
      * Inizializza configurazione, logger e registra eventi.
      */
     @Override
+    @SuppressWarnings("deprecation")
     public void onEnable() {
         this.logger = getLogger();
 
@@ -150,6 +151,7 @@ public class CoarseDirtGuard extends JavaPlugin implements Listener {
      * @return true se il comando è stato gestito correttamente
      */
     @Override
+    @SuppressWarnings("deprecation")
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!command.getName().equalsIgnoreCase("coarsedirtguard")) {
             return false;
