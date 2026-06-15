@@ -8,7 +8,11 @@
 [![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)
 [![it](https://img.shields.io/badge/lang-it-green.svg)](Docs/README.it.md)
 
-> 📝 [Changelog](Docs/CHANGELOG.en.md)
+> 📝 **Changelog**: See [CHANGELOG.en.md](Docs/CHANGELOG.en.md) for version history.
+
+---
+
+## 📖 Overview
 
 Lightweight and performant plugin for Spigot/Paper that **silently** prevents the transformation of specific blocks (like coarse dirt) into dirt paths or dirt when using shovels or hoes. Perfect for protecting decorative areas or special terrain without impacting gameplay experience.
 
@@ -446,6 +450,3 @@ For bug reports, feature requests, or questions:
 
 ---
 
-## 📝 Changelog
-
-See [CHANGELOG.en.md](Docs/CHANGELOG.en.md) for complete version history.
