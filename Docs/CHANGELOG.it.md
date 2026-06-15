@@ -1,67 +1,62 @@
-# Changelog
+# Changelog - CoarseDirtGuard
 
-Tutte le modifiche rilevanti a questo progetto saranno documentate in questo file.
+Tutte le modifiche rilevanti al plugin **CoarseDirtGuard** saranno documentate in questo file.
 
-Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+Il formato è basato su [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 e questo progetto segue il [Versionamento Semantico](https://semver.org/spec/v2.0.0.html).
-
-## [1.1.0] - Febbraio 2026 — Ottimizzazioni e Nuove Funzionalità
-
-### ⚡ Ottimizzazioni Performance
-- **EnumSet O(1) Lookup**: Sostituiti confronti multipli con `EnumSet` per lookup O(1)
-  - Metodi `isShovel()` e `isHoe()` ora usano `EnumSet.contains()` invece di catene di OR
-- **HashSet per Blocchi Protetti**: Usato `HashSet<Material>` per lookup più veloci e validazione al caricamento config
-
-### 🆕 Nuove Funzionalità
-- Comando dedicato `/coarsedirtguard reload` (alias: `/cdg`, `/cdguard`)
-  - Ricarica configurazione senza `/reload confirm`
-  - Richiede permesso `coarsedirtguard.reload`
-- Comando `/coarsedirtguard info` — mostra stato del plugin e impostazioni attive
-- Sistema permessi granulare:
-  - `coarsedirtguard.bypass` — bypassa tutte le protezioni
-  - `coarsedirtguard.bypass.shovel` — bypassa solo pale
-  - `coarsedirtguard.bypass.hoe` — bypassa solo zappe
-  - `coarsedirtguard.reload` — permette reload configurazione
-- Modalità debug: nuova opzione `settings.debug` in `config.yml`
-
-### 🔧 Miglioramenti
-- JavaDoc completo per tutte le classi e metodi
-- Gestione errori avanzata: validazione Material con fallback a `COARSE_DIRT`
-- Il plugin si disabilita automaticamente su errori critici di configurazione
-- Logging strutturato con `String.format()`
-
-### 🐛 Bug Fix
-- Il plugin non va più in crash con config malformata
-- I Material non validi vengono ignorati con un warning
-
-## [1.0.0] - Dicembre 2024 — Release Iniziale
-
-### Aggiunto
-- Prima release pubblica stabile
-- Sistema di protezione blocchi: blocco silenzioso delle trasformazioni dirt path (pale) e dirt (zappe)
-- Supporto per tutti i materiali pale e zappe vanilla (wooden → netherite)
-- `config.yml` personalizzabile con toggle indipendenti per pale/zappe e logging opzionale
-- Architettura a singola classe Java per footprint minimale
-- Event listener su `PlayerInteractEvent`
-- Zero dipendenze runtime (solo Paper API provided)
-- Licenza MIT
-
-## [Non Rilasciato]
-
-### Pianificato
-- Configurazione per-mondo
-- Supporto regioni WorldGuard
-- Materiali configurabili aggiuntivi
 
 ---
 
-## Cronologia Versioni
+## [1.1.0] - 2026-02-01
 
-### Come Leggere i Numeri di Versione
-- **Major.Minor.Patch** (es. 1.1.0)
-  - **Major**: Modifiche incompatibili o aggiunta di funzionalità principali
-  - **Minor**: Nuove funzionalità, compatibili con versioni precedenti
-  - **Patch**: Correzioni di bug e piccoli miglioramenti
+### Aggiunto
+- **Comando Reload**: Comando dedicato `/coarsedirtguard reload` (alias: `/cdg`, `/cdguard`) — ricarica la configurazione senza `/reload confirm`. Richiede il permesso `coarsedirtguard.reload`.
+- **Comando Info**: Comando `/coarsedirtguard info` — mostra lo stato del plugin e le impostazioni attive.
+- **Permessi Granulari**: Nuovi nodi di permesso: `coarsedirtguard.bypass`, `coarsedirtguard.bypass.shovel`, `coarsedirtguard.bypass.hoe`, `coarsedirtguard.reload`.
+- **Modalità Debug**: Nuova opzione `settings.debug` in `config.yml`.
 
-[1.1.0]: https://github.com/Fagghino/CoarseDirtGuard/releases/tag/v1.1.0
-[1.0.0]: https://github.com/Fagghino/CoarseDirtGuard/releases/tag/v1.0.0
+### Modificato
+- **Performance**: Sostituiti confronti multipli con `EnumSet` per lookup O(1) in `isShovel()` e `isHoe()`.
+- **Performance**: Usato `HashSet<Material>` per i blocchi protetti — lookup più veloci e validazione Material al caricamento della config.
+- **Documentazione**: JavaDoc completo per tutte le classi e i metodi.
+- **Gestione Errori**: Gestione errori avanzata — validazione Material con fallback a `COARSE_DIRT`. Il plugin si disabilita automaticamente su errori critici di configurazione.
+- **Logging**: Logging strutturato con `String.format()`.
+
+### Risolto
+- **Stabilità**: Il plugin non va più in crash con config malformata.
+- **Validazione**: I Material non validi vengono ignorati silenziosamente con un warning.
+
+---
+
+## [1.0.0] - 2024-12-01
+
+### Aggiunto
+- **Prima Release**: Prima release pubblica stabile.
+- **Protezione Blocchi**: Blocco silenzioso delle trasformazioni dirt path (pale) e dirt (zappe).
+- **Supporto Strumenti**: Supporto per tutti i materiali pale e zappe vanilla (wooden → netherite).
+- **Configurazione**: `config.yml` personalizzabile con toggle indipendenti per pale/zappe e logging opzionale.
+- **Architettura**: Architettura a singola classe Java per footprint minimale.
+- **Eventos**: Event listener su `PlayerInteractEvent`.
+- **Dipendenze**: Zero dipendenze runtime (solo Paper API provided).
+
+---
+
+## Roadmap di Sviluppo
+
+### Fase 1 - Prima Release ✅
+- Sistema di protezione blocchi per pale e zappe.
+- Toggle configurabili per strumento.
+
+### Fase 2 - Comandi e Permessi ✅
+- Comando reload dedicato.
+- Permessi di bypass granulari.
+
+### Fase 3 - Funzionalità Avanzate 📋
+- Configurazione per-mondo.
+- Supporto regioni WorldGuard.
+- Materiali configurabili aggiuntivi.
+
+---
+
+*Formato: [Versione] - Data*
+*Categorie: Aggiunto, Modificato, Risolto, Rimosso*
