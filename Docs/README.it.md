@@ -8,7 +8,11 @@
 [![en](https://img.shields.io/badge/lang-en-red.svg)](../README.md)
 [![it](https://img.shields.io/badge/lang-it-green.svg)](README.it.md)
 
-> 📝 [Changelog](CHANGELOG.it.md)
+> 📝 **Changelog**: Consulta [CHANGELOG.it.md](CHANGELOG.it.md) per la cronologia delle versioni.
+
+---
+
+## 📖 Panoramica
 
 Plugin leggero e performante per Spigot/Paper che impedisce **silenziosamente** la trasformazione di blocchi specifici (come la coarse dirt) in dirt path o dirt quando si utilizzano pale o zappe. Perfetto per proteggere aree decorative o terreni speciali senza impattare l'esperienza di gioco.
 
@@ -445,7 +449,4 @@ Per bug report, richieste di funzionalità o domande:
 - [Paper Discussion Forum](https://forums.papermc.io/)
 
 ---
-
-## 📝 Changelog
-
-Consulta [CHANGELOG.it.md](CHANGELOG.it.md) per la cronologia completa delle versioni.
+
